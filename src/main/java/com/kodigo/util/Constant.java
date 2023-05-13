@@ -1,5 +1,7 @@
 package com.kodigo.util;
 
+import java.math.BigDecimal;
+
 public class Constant {
 
     //endpoints
@@ -62,6 +64,7 @@ public class Constant {
     public static final String INITIAL_DATE = "initialDate";
     public static final String END_DATE = "endDate";
     public static final String ID_CLIENT_PARAM = "idClient";
+    public static final String ID_ACCOUNT_PARAM = "idAccount";
 
     //service
      public static final String ID_NOT_FOUND = "ID not found: ";
@@ -69,8 +72,11 @@ public class Constant {
     public static final String DEPOSIT = "DEPOSIT";
     public static final String BALANCE_NOT_AVAILABLE = "Balance not available";
     public static final String NO_REPORT = "No Record for this report idClient: ";
+    public static final Double DAILY_AMOUNT = 1000.0;
+    public static final String DAILY_AMOUNT_EXCEEDED = "Daily coupon exceeded, coupon -> $1000";
 
     //seguridad
     public static final String USUARIO_NO_EXISTE = "Usuario no existe";
     public static final String CAMBIE_DE_USUARIO = "El usuario ya existe, por favor cambie de usuario";
+
 }

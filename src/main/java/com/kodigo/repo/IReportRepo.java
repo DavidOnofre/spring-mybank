@@ -14,4 +14,9 @@ public interface IReportRepo extends IGenericRepo<Movement, Integer> {
     List<Movement> getReport(@Param(Constant.INITIAL_DATE) LocalDateTime initialDate,
                              @Param(Constant.END_DATE) LocalDateTime endDate,
                              @Param(Constant.ID_CLIENT_PARAM) Integer idClient);
+
+    @Query("FROM Movement c WHERE (c.account.idAccount =:idAccount) AND(c.movementType='WITHDRAWAL') AND (c.date BETWEEN :initialDate AND :endDate)")
+    List<Movement> getDailyWithdrawal(@Param(Constant.INITIAL_DATE) LocalDateTime initialDate,
+                                      @Param(Constant.END_DATE) LocalDateTime endDate,
+                                      @Param(Constant.ID_ACCOUNT_PARAM) Integer idAccount);
 }

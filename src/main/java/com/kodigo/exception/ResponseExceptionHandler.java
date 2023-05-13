@@ -1,6 +1,5 @@
 package com.kodigo.exception;
 
-import com.kodigo.controller.ClientController;
 import com.kodigo.util.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +27,14 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllException(Exception ex, WebRequest request) {
         ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-        proccesLog(ex.getMessage(), ex.getCause().getMessage());
+        processLog(ex.getMessage(), request.getDescription(true));
         return new ResponseEntity<ExceptionResponse>(er, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ModelNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleModelNotFoundException(ModelNotFoundException ex, WebRequest request) {
         ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-        proccesLog(ex.getMessage(), ex.getCause().getMessage());
+        processLog(ex.getMessage(), request.getDescription(true));
         return new ResponseEntity<ExceptionResponse>(er, HttpStatus.NOT_FOUND);
     }
 
@@ -43,7 +42,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<ExceptionResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
         String[] causes = getCauses(ex);
         ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), getMessage(causes), getDetail(causes));
-        proccesLog(ex.getCause().getLocalizedMessage(), ex.getCause().getCause().getMessage());
+        processLog(ex.getCause().getLocalizedMessage(), ex.getCause().getCause().getMessage());
         return new ResponseEntity<ExceptionResponse>(er, HttpStatus.CONFLICT);
     }
 
@@ -83,11 +82,11 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
         ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), aloneMessage, request.getDescription(false));
 
-        proccesLog(aloneMessage, ex.getMessage());
+        processLog(aloneMessage, ex.getMessage());
         return new ResponseEntity<Object>(er, HttpStatus.BAD_REQUEST);
     }
 
-    private void proccesLog(String message, String details) {
+    private void processLog(String message, String details) {
         LOGGER.warn(message);
         LOGGER.error(details);
     }

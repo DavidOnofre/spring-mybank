@@ -6,6 +6,7 @@ import com.kodigo.model.Movement;
 import com.kodigo.repo.IAccountRepo;
 import com.kodigo.repo.IGenericRepo;
 import com.kodigo.repo.IMovementRepo;
+import com.kodigo.repo.IReportRepo;
 import com.kodigo.service.IMovementService;
 import com.kodigo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +28,9 @@ public class MovementServiceImpl extends CRUDImpl<Movement, Integer> implements 
 
     @Autowired
     private IAccountRepo iAccountRepo;
+
+    @Autowired
+    private IReportRepo iReportRepo;
 
     @Override
     protected IGenericRepo<Movement, Integer> getRepo() {
@@ -62,6 +69,8 @@ public class MovementServiceImpl extends CRUDImpl<Movement, Integer> implements 
         switch (movement.getMovementType()) {
             case Constant.WITHDRAWAL:
 
+                validateDailyLimit(movement);
+
                 BigDecimal balanceAfterWithdrawal = account.getAvailableBalance().subtract(movement.getAmount());
                 if (balanceAfterWithdrawal.compareTo(BigDecimal.ZERO) < 0) {
                     throw new ModelNotFoundException(Constant.BALANCE_NOT_AVAILABLE);
@@ -79,6 +88,25 @@ public class MovementServiceImpl extends CRUDImpl<Movement, Integer> implements 
                 break;
         }
 
+    }
+
+    private void validateDailyLimit(Movement movement) {
+        LocalDateTime initialDate = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
+        LocalDateTime endDate = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 59, 0));
+
+        List<Movement> movements = iReportRepo.getDailyWithdrawal(initialDate, endDate, movement.getAccount().getIdAccount());
+
+        if (movements.size() != 0) {
+
+            Double a = movements.stream()
+                    .mapToDouble(e -> e.getAmount().doubleValue())
+                    .sum() + movement.getAmount().doubleValue();
+
+            if (Constant.DAILY_AMOUNT.compareTo(a) < 0) {
+                throw new ModelNotFoundException(Constant.DAILY_AMOUNT_EXCEEDED);
+            }
+
+        }
     }
 
 }
