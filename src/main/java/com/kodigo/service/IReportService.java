@@ -3,5 +3,5 @@ import com.kodigo.model.dto.ReportDTO;
 import com.kodigo.model.dto.ParamsReportDTO;
 
 public interface IReportService {
-    ReportDTO generateReport(ParamsReportDTO criterios);
+    ReportDTO generateReport(ParamsReportDTO params);
 }

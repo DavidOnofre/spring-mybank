@@ -13,11 +13,6 @@ import java.util.List;
 public class ReportDTO {
 
     private String client;
-    private String accountNumber;
-    private String accountType;
-    private Boolean state;
-    private BigDecimal initialBalance;
-    private BigDecimal availableBalance;
-    private List<MovementDTO> movements;
+    private List<AccountDTO> accounts;
 
 }

@@ -60,7 +60,6 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         String message = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
-                .distinct()
                 .map(e -> {
                     return e.getDefaultMessage().toString().concat(Constant.COMMA);
                 })
