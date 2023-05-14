@@ -51,7 +51,6 @@ public class ReportServiceImpl extends CRUDImpl<Movement, Integer> implements IR
         return accountDTOs;
     }
 
-
     private String getFirstRecordClientName(List<Movement> movements) {
         return movements.get(0).getAccount().getClient().getName();
     }
