@@ -27,10 +27,10 @@ class AccountServiceImplTest {
     @Mock
     private IClientRepo iClientRepo;
 
-    Account account;
-
     @InjectMocks
     private AccountServiceImpl accountService;
+
+    Account account;
 
     @BeforeEach
     void setUp() {
@@ -56,7 +56,7 @@ class AccountServiceImplTest {
             accountService.saveAccount(account);
         });
 
-        String expectedMessage = Constant.ID_NOT_FOUND;
+        String expectedMessage = Constant.NO_REPORT;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
