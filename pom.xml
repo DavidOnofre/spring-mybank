@@ -33,11 +33,18 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Data Base h2 -->
+        <!-- data base h2 -->
         <!-- http://localhost:8082/login.jsp -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+
+        <!-- data base integration test -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- validations -->

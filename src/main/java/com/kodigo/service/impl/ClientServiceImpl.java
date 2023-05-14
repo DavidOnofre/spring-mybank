@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class ClientServiceImpl extends CRUDImpl<Client, Integer> implements IClientService {
 
     @Autowired
-    private IClientRepo clientRepo;
+    private IClientRepo iClientRepo;
 
     @Override
     protected IGenericRepo<Client, Integer> getRepo() {
-        return clientRepo;
+        return iClientRepo;
     }
 
 }

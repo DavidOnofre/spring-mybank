@@ -56,7 +56,7 @@ class AccountServiceImplTest {
             accountService.saveAccount(account);
         });
 
-        String expectedMessage = Constant.NO_REPORT;
+        String expectedMessage = Constant.ID_NOT_FOUND;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
