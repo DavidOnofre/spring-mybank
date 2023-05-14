@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "210c71c8-c8d0-483a-bc5f-8bafd709dc97",
+		"name": "springMyBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clients",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userClient\": \"kodigo10\",\n    \"passwordClient\": \"123456789\",\n    \"stateClient\": true,\n    \"name\": \"Dario Onofre\",\n    \"gender\": \"M\",\n    \"age\": 34,\n    \"identification\": \"1719382985\",\n    \"address\": \"Tambo del Inca\",\n    \"phone\": \"0988569896\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsia29kaWdvX3Jlc291cmNlX2lkIl0sImV4cCI6MTY4NDA1NTI1MCwidXNlcl9uYW1lIjoia29kaWdvMTAiLCJqdGkiOiI2ODQ3Y2ZmOS1lN2JiLTRiMzEtODIxMS0xN2RiODhiZDA0MDEiLCJjbGllbnRfaWQiOiJrb2RpZ29fc3ByaW5nTXlCYW5rX2lkIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl19.gS7P3jI9fjem5uGfOQ9nbhdIMBVohhvfbg07ESdPEPk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountNumber\": \"2234565893\",\n    \"accountType\": \"CURRENT\",\n    \"initialBalance\": \"500\",\n    \"stateAccount\": true,\n    \"client\": {\n        \"idClient\": 2\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsia29kaWdvX3Jlc291cmNlX2lkIl0sImV4cCI6MTY4NDAxOTA0OSwidXNlcl9uYW1lIjoia29kaWdvMTAiLCJqdGkiOiIyYzdhYmJkYi00MWY2LTQwOTctYmZmNC1lNDg5MjdlM2RkMjgiLCJjbGllbnRfaWQiOiJrb2RpZ29fc3ByaW5nTXlCYW5rX2lkIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl19.r1pGX1o6X6oRBRJ8OB8gNEqhQcaHF3tLziJY2VIbfoI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movementType\": \"WITHDRAWAL\",\n    \"amount\": 150,\n    \"account\": {\n        \"idAccount\": 3\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/movements",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"movements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reportes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsia29kaWdvX3Jlc291cmNlX2lkIl0sImV4cCI6MTY4NDAxOTA5MiwidXNlcl9uYW1lIjoia29kaWdvMTAiLCJqdGkiOiJkYmJkZTE0MC1iOTNkLTRjMGMtODRkNi02YzlmNTcyYWJmNjAiLCJjbGllbnRfaWQiOiJrb2RpZ29fc3ByaW5nTXlCYW5rX2lkIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl19.fgGNrochopZpMTEeLJoW0pP7vfWNPxsDgSaINzdARts",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idClient\": 1,\n    \"initialDate\": \"2023-05-13T10:07:40.40995\",\n    \"endDate\": \"2023-05-13T18:00:54.882339\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/reports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/oauth/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "kodigo_codex_secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kodigo_springMyBank_id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "username",
+							"value": "kodigo10",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "123456789",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9090/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
